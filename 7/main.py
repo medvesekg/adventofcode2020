@@ -2,7 +2,7 @@
 with open('input', 'r') as f:
     lines = f.readlines()
 
-
+print(lines)
 bags = {}
 for line in lines:
     words = line.split()
