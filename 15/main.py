@@ -1,28 +1,26 @@
 from time import time
 
-with open('testinput', 'r') as f:
+with open('input', 'r') as f:
     numbers = [int(number) for number in f.read().split(',')]
 
 start = time()
 turn = len(numbers)
+spoken = { number: i+1 for i,number in enumerate(numbers[:-1])}
+
 while True:
 
-    if(turn == 10000):
+    if(turn == 30000000):
         print(numbers[-1])
         print(time() - start)
         break
 
-
     last_number = numbers[-1]
 
-    try:
-        previously_spoken = len(numbers) - numbers[::-1][1:].index(last_number) - 1
-        last_spoken = len(numbers)
-
-        numbers.append(last_spoken - previously_spoken)
-    except ValueError:
+    if last_number in spoken:
+        numbers.append(len(numbers) - spoken[last_number])
+    else:
         numbers.append(0)
-
+    spoken[last_number] = turn
 
     turn += 1
 
